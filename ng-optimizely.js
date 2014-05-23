@@ -25,4 +25,4 @@ angular.module('ng-optimizely', ['ng'])
     });
 
     return service;
-]);
+}]);
