@@ -5,13 +5,13 @@ A simple wrapper to pull in the Optimizely snippet with an AngularJS.
 ## Install
 
 ```bash
-$ bower install --save angular-optimizely
+$ bower install --save ng-optimizely
 ```
 
-Then require angular-optimizely in your application:
+Then require ng-optimizely in your application:
 
 ```javascript
-var app = angular.module('app', ['angular-optimizely']);
+var app = angular.module('app', ['ng-optimizely']);
 ```
 
 ## Run
@@ -25,7 +25,7 @@ angular.module('app')
 }]);
 ```
 
-The angular-optimizely module will automatically run all relevant optimizely tests every time a new view comes up in the browser.
+The ng-optimizely module will automatically run all relevant optimizely tests every time a new view comes up in the browser.
 
 ## Test
 

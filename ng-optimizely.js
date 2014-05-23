@@ -1,5 +1,5 @@
-angular.module('optimizely', ['ng'])
-.factory('$optimizely', ['$rootScope', '$window', '$timeout'
+angular.module('ng-optimizely', ['ng'])
+.factory('optimizely', ['$rootScope', '$window', '$timeout'
 , function($rootScope, $window, $timeout) {
     service = $window.optimizely = $window.optimizely || [];
 
