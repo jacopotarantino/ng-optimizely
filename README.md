@@ -18,7 +18,7 @@ var app = angular.module('app', ['ng-optimizely']);
 
 In your app's run block execute the `loadProject` method:
 
-```
+```javascript
 angular.module('app')
 .run(['optimizely', function(optimizely) {
   optimizely.loadProject('880950754');
@@ -26,6 +26,21 @@ angular.module('app')
 ```
 
 The ng-optimizely module will automatically run all relevant optimizely tests every time a new view comes up in the browser.
+
+A better way to load the library and avoid a FOUC is to use a router like [ui-router](https://github.com/angular-ui/ui-router) that allows you to defer pageload until after all of a given route's dependencies have been loaded. The `loadProject` method returns a promise so you can use it with any give plugin or framework but ui-router is a really good choice for most projects.
+
+```javascript
+app.config(function($stateProvider, 'ng-optimizely') {
+  $stateProvider.state('app.dashboard', {
+    // ... other stuff ...
+    resolve: {
+      optimizely: function('ng-optimizely') {
+        $optimizelyProvider.loadProject();
+      }
+    }
+  });
+});
+```
 
 ## Test
 
