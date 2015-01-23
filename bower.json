@@ -18,5 +18,8 @@
     "public/lib",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": ">=1.2.0"
+  }
 }
