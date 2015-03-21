@@ -1,6 +1,6 @@
 # Angular Optimizely Module
 
-A simple wrapper to pull in the Optimizely snippet with an AngularJS.
+A simple wrapper to pull in the Optimizely snippet with an AngularJS-based application. This module provides only a simple API to download the Optimizely snippet onto the page. All of your tests should be coded and targeted within the Optimizely interface. The `loadProject` method(usage described below) returns a promise so you can delay execution until after the snippet has loaded.
 
 ## Install
 
