@@ -8,6 +8,13 @@ A simple wrapper to pull in the Optimizely snippet with an AngularJS-based appli
 $ bower install --save ng-optimizely
 ```
 
+Add ng-optimizely.js to your index.html file:
+
+```html
+<!-- Angular optimizely -->
+<script src="bower_components/ng-optimizely/ng-optimizely.js"></script>
+```
+
 Then require ng-optimizely in your application:
 
 ```javascript
