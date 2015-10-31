@@ -3,7 +3,7 @@ angular.module('ng-optimizely', ['ng'])
 , function($rootScope, $window, $timeout, $q) {
     var service = $window.optimizely = $window.optimizely || [];
 
-    service.loadProject = function(key) {
+    service.loadProject = function(key, activationEventName) {
       if (document.getElementById('optimizely-js') || key == void 0) {
         return;
       }
@@ -22,14 +22,16 @@ angular.module('ng-optimizely', ['ng'])
       first = document.getElementsByTagName('script')[0];
       first.parentNode.insertBefore(script, first);
 
+      deferred.promise.then(function() {
+        $rootScope.$on(activationEventName || '$viewContentLoaded', function() {
+          $timeout(function() {
+            $window.optimizely.push(['activate']);
+          });
+        });
+      });
+
       return deferred.promise;
     };
-
-    $rootScope.$on('$viewContentLoaded', function() {
-      $timeout(function() {
-        $window.optimizely.push(['activate']);
-      });
-    });
 
     return service;
 }]);
