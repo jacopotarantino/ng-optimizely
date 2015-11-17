@@ -1,7 +1,7 @@
 {
   "name": "ng-optimizely",
   "main": "ng-optimizely.js",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "authors": [
     "Jack Tarantino <jack@ofspades.com>"
   ],
