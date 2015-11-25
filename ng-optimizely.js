@@ -18,6 +18,9 @@ angular.module('ng-optimizely', ['ng'])
       script.onload = script.onreadystatechange = function () {
         deferred.resolve($window.optimizely);
       };
+      script.onerror = script.onreadystatechange = function (error) {
+        deferred.reject(error);
+      };
 
       first = document.getElementsByTagName('script')[0];
       first.parentNode.insertBefore(script, first);
