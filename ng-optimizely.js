@@ -4,11 +4,13 @@ angular.module('ng-optimizely', ['ng'])
     var service = $window.optimizely = $window.optimizely || [];
 
     service.loadProject = function(key, activationEventName) {
-      if (document.getElementById('optimizely-js') || key == void 0) {
-        return;
-      }
-
       var deferred = $q.defer();
+
+      if (document.getElementById('optimizely-js')) {
+        deferred.reject(new Error({message: 'Optimizely already activated'}));
+      } else if (key == void 0) {
+        deferred.reject(new Error({message: 'Key not provided'}));
+      }
 
       script = document.createElement('script');
       script.type = 'text/javascript';
