@@ -70,6 +70,16 @@ angular.module('app')
 }]);
 ```
 
+To trigger the code as soon as possible instead of upon a certain event, set the activation event name to false:
+
+```javascript
+angular.module('app')
+.config(['optimizelyProvider', function(optimizelyProvider) {
+  optimizelyProvider.setKey('880950754');
+  optimizelyProvider.setActivationEventName(false);
+}]);
+```
+
 ## Test
 
 TODO...

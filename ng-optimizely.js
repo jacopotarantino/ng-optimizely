@@ -38,11 +38,15 @@ angular.module('ng-optimizely', ['ng'])
         first.parentNode.insertBefore(script, first);
 
         deferred.promise.then(function() {
-          $rootScope.$on(activationEventName, function() {
-            $timeout(function() {
-              $window.optimizely.push(['activate']);
+          if (!activationEventName) {
+            $window.optimizely.push(['activate']);
+          } else {
+            $rootScope.$on(activationEventName, function() {
+              $timeout(function() {
+                $window.optimizely.push(['activate']);
+              });
             });
-          });
+          }
         });
       }
 
