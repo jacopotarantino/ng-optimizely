@@ -1,9 +1,18 @@
 angular.module('ng-optimizely', ['ng'])
-.factory('optimizely', ['$rootScope', '$window', '$timeout', '$q'
+.provider('optimizely', function() {
+    var key;
+    var activationEventName;
+    this.setKey = function(val) {
+        key = val;
+    };
+    this.setActivationEventName = function(val) {
+        activationEventName = val;
+    };
+    this.$get = ['$rootScope', '$window', '$timeout', '$q'
 , function($rootScope, $window, $timeout, $q) {
     var service = $window.optimizely = $window.optimizely || [];
 
-    service.loadProject = function(key, activationEventName) {
+    service.loadProject = function() {
       var deferred = $q.defer();
 
       if (document.getElementById('optimizely-js')) {
@@ -41,4 +50,4 @@ angular.module('ng-optimizely', ['ng'])
     };
 
     return service;
-}]);
+}]});

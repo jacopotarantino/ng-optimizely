@@ -21,6 +21,17 @@ Then require ng-optimizely in your application:
 var app = angular.module('app', ['ng-optimizely']);
 ```
 
+## Config
+
+In your app's run block execute the `setKey` method:
+
+```javascript
+angular.module('app')
+.config(['optimizelyProvider', function(optimizelyProvider) {
+  optimizelyProvider.setKey('880950754');
+}]);
+```
+
 ## Run
 
 In your app's run block execute the `loadProject` method:
@@ -28,7 +39,7 @@ In your app's run block execute the `loadProject` method:
 ```javascript
 angular.module('app')
 .run(['optimizely', function(optimizely) {
-  optimizely.loadProject('880950754');
+  optimizely.loadProject();
 }]);
 ```
 
@@ -42,11 +53,21 @@ app.config(function($stateProvider) {
     // ... other stuff ...
     resolve: {
       optimizely: function(optimizely) {
-        return optimizely.loadProject('880950754', '$stateChangeSuccess');
+        return optimizely.loadProject();
       }
     }
   });
 });
+```
+
+You can also customize on which event the optimizely code should trigger. The default is '$viewContentLoaded'.
+
+```javascript
+angular.module('app')
+.config(['optimizelyProvider', function(optimizelyProvider) {
+  optimizelyProvider.setKey('880950754');
+  optimizelyProvider.setActivationEventName('$stateChangeSuccess');
+}]);
 ```
 
 ## Test
