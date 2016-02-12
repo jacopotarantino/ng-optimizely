@@ -1,7 +1,7 @@
 angular.module('ng-optimizely', ['ng'])
 .provider('optimizely', function() {
     var key;
-    var activationEventName;
+    var activationEventName = '$viewContentLoaded';
     this.setKey = function(val) {
         key = val;
     };
@@ -38,7 +38,7 @@ angular.module('ng-optimizely', ['ng'])
         first.parentNode.insertBefore(script, first);
 
         deferred.promise.then(function() {
-          $rootScope.$on(activationEventName || '$viewContentLoaded', function() {
+          $rootScope.$on(activationEventName, function() {
             $timeout(function() {
               $window.optimizely.push(['activate']);
             });
