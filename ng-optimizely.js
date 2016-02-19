@@ -4,34 +4,38 @@ angular.module('ng-optimizely', ['ng'])
     var service = $window.optimizely = $window.optimizely || [];
 
     service.loadProject = function(key, activationEventName) {
-      if (document.getElementById('optimizely-js') || key == void 0) {
-        return;
-      }
-
       var deferred = $q.defer();
 
-      script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.id = 'optimizely-js';
-      script.async = true;
-      script.src = 'https://cdn.optimizely.com/js/' + key + '.js';
-      script.onload = script.onreadystatechange = function () {
-        deferred.resolve($window.optimizely);
-      };
-      script.onerror = script.onreadystatechange = function (error) {
-        deferred.reject(error);
-      };
+      if (document.getElementById('optimizely-js')) {
+        deferred.reject(new Error({message: 'Optimizely already activated'}));
 
-      first = document.getElementsByTagName('script')[0];
-      first.parentNode.insertBefore(script, first);
+      } else if (key == void 0) {
+        deferred.reject(new Error({message: 'Key not provided'}));
 
-      deferred.promise.then(function() {
-        $rootScope.$on(activationEventName || '$viewContentLoaded', function() {
-          $timeout(function() {
-            $window.optimizely.push(['activate']);
+      } else {
+        script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.id = 'optimizely-js';
+        script.async = true;
+        script.src = 'https://cdn.optimizely.com/js/' + key + '.js';
+        script.onload = script.onreadystatechange = function () {
+          deferred.resolve($window.optimizely);
+        };
+        script.onerror = script.onreadystatechange = function (error) {
+          deferred.reject(error);
+        };
+
+        first = document.getElementsByTagName('script')[0];
+        first.parentNode.insertBefore(script, first);
+
+        deferred.promise.then(function() {
+          $rootScope.$on(activationEventName || '$viewContentLoaded', function() {
+            $timeout(function() {
+              $window.optimizely.push(['activate']);
+            });
           });
         });
-      });
+      }
 
       return deferred.promise;
     };
