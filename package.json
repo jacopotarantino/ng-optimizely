@@ -1,0 +1,25 @@
+{
+  "name": "ng-optimizely",
+  "version": "1.0.0",
+  "description": "Angular module wrapper for Optimizely script",
+  "main": "ng-optimizely.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacopotarantino/ng-optimizely.git"
+  },
+  "keywords": [
+    "angular",
+    "optimizely",
+    "angularjs",
+    "testing"
+  ],
+  "author": "Jack Tarantino <jack@ofspades.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jacopotarantino/ng-optimizely/issues"
+  },
+  "homepage": "https://github.com/jacopotarantino/ng-optimizely#readme"
+}
