@@ -1,9 +1,18 @@
 angular.module('ng-optimizely', ['ng'])
-.factory('optimizely', ['$rootScope', '$window', '$timeout', '$q'
+.provider('optimizely', function() {
+    var key;
+    var activationEventName = '$viewContentLoaded';
+    this.setKey = function(val) {
+        key = val;
+    };
+    this.setActivationEventName = function(val) {
+        activationEventName = val;
+    };
+    this.$get = ['$rootScope', '$window', '$timeout', '$q'
 , function($rootScope, $window, $timeout, $q) {
     var service = $window.optimizely = $window.optimizely || [];
 
-    service.loadProject = function(key, activationEventName) {
+    service.loadProject = function() {
       var deferred = $q.defer();
 
       if (document.getElementById('optimizely-js')) {
@@ -29,11 +38,15 @@ angular.module('ng-optimizely', ['ng'])
         first.parentNode.insertBefore(script, first);
 
         deferred.promise.then(function() {
-          $rootScope.$on(activationEventName || '$viewContentLoaded', function() {
-            $timeout(function() {
-              $window.optimizely.push(['activate']);
+          if (!activationEventName) {
+            $window.optimizely.push(['activate']);
+          } else {
+            $rootScope.$on(activationEventName, function() {
+              $timeout(function() {
+                $window.optimizely.push(['activate']);
+              });
             });
-          });
+          }
         });
       }
 
@@ -41,4 +54,4 @@ angular.module('ng-optimizely', ['ng'])
     };
 
     return service;
-}]);
+}]});
