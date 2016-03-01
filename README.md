@@ -80,6 +80,13 @@ angular.module('app')
 }]);
 ```
 
+## Breaking changes in Version 2
+
+* ng-optimizely is now a `provider`, not a `factory`. This means you'll need to configure it in a `.config()` block instead of within another module.
+* `optimizelyProvider#setKey` - new method for setting your project key.
+* `optimizelyProvider#setActivationEventName` - new method for setting the activation event name if you want to override the default.
+* (not actually breaking) - started publishing to npm.
+
 ## Test
 
 TODO...
