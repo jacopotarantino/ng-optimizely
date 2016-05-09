@@ -22,7 +22,7 @@ angular.module('ng-optimizely', ['ng'])
         deferred.reject(new Error({message: 'Key not provided'}));
 
       } else {
-        script = document.createElement('script');
+        var script = document.createElement('script');
         script.type = 'text/javascript';
         script.id = 'optimizely-js';
         script.async = true;
@@ -34,7 +34,7 @@ angular.module('ng-optimizely', ['ng'])
           deferred.reject(error);
         };
 
-        first = document.getElementsByTagName('script')[0];
+        var first = document.getElementsByTagName('script')[0];
         first.parentNode.insertBefore(script, first);
 
         deferred.promise.then(function() {
